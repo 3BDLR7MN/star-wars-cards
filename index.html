@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- this stylesheet is for dojo dijit style (claro specifically) -->
+    <link
+      rel="stylesheet"
+      href="http://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dijit/themes/claro/claro.css"
+      media="screen"
+    />
+
+    <!-- CSS -->
+    <style></style>
+
+    <title>SWC</title>
+  </head>
+
+  <!-- in order for the dijit style to apply you have to link a class to the body -->
+  <body class="claro">
+    <!-- Container -->
+    <div
+      id="BorderContainer"
+      data-dojo-type="dijit/layout/BorderContainer"
+      style="width: 100%; height: 100%"
+    >
+      <!-- center pane -->
+      <div
+        id="centerPane"
+        data-dojo-type="dijit/layout/ContentPane"
+        data-dojo-props="region: 'center'"
+      ></div>
+    </div>
+
+    <!-- Dojo CDN Script -->
+    <!-- http: IMPORTANT -->
+    <script
+      src="http://ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"
+      data-dojo-config="has:{'dojo-firebug': true}, parseOnLoad: true, foo: 'bar', async: 1"
+    ></script>
+
+    <!-- Dojo Script -->
+    <script>
+      require(["dojo/dom", "dojo/on", "dojo/domReady!"], function (dom, on) {});
+    </script>
+  </body>
+</html>
