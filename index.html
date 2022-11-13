@@ -20,6 +20,7 @@
 
   <!-- in order for the dijit style to apply you have to link a class to the body -->
   <body class="claro">
+    <button id="btn">Random person name</button>
     <h2 id="header">test</h2>
 
     <!-- Dojo CDN Script -->
@@ -37,20 +38,32 @@
         "dojo/request/xhr",
         "dojo/domReady!",
       ], function (dom, on, xhr) {
+        var btn = dom.byId("btn");
         var header = dom.byId("header");
 
-        xhr("https://swapi.dev/api/staships/9/", {
-          handleAs: "json",
-        }).then(
-          function (obj) {
-            // do something with the obj
-            header.innerHTML = obj.name;
-          },
-          function (err) {
-            // Handle the error condition
-            header.innerHTML = "ERR";
+        on(btn, "click", function () {
+          var num;
+
+          // this loop is to avoid getting #17 since it's not in the api!
+          while (true) {
+            num = Math.floor(Math.random() * 83) + 1;
+            if (num !== 17) break;
           }
-        );
+
+          // this block of code will fetch api data and handle it as a json obj
+          xhr(`https://swapi.dev/api/people/${num}/`, {
+            handleAs: "json",
+          }).then(
+            function (obj) {
+              // do something with the obj
+              header.innerHTML = obj.name;
+            },
+            function (err) {
+              // Handle the error condition
+              header.innerHTML = "ERR";
+            }
+          );
+        });
       });
     </script>
   </body>
