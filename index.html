@@ -20,19 +20,7 @@
 
   <!-- in order for the dijit style to apply you have to link a class to the body -->
   <body class="claro">
-    <!-- Container -->
-    <div
-      id="BorderContainer"
-      data-dojo-type="dijit/layout/BorderContainer"
-      style="width: 100%; height: 100%"
-    >
-      <!-- center pane -->
-      <div
-        id="centerPane"
-        data-dojo-type="dijit/layout/ContentPane"
-        data-dojo-props="region: 'center'"
-      ></div>
-    </div>
+    <h2 id="header">test</h2>
 
     <!-- Dojo CDN Script -->
     <!-- http: IMPORTANT -->
@@ -43,7 +31,27 @@
 
     <!-- Dojo Script -->
     <script>
-      require(["dojo/dom", "dojo/on", "dojo/domReady!"], function (dom, on) {});
+      require([
+        "dojo/dom",
+        "dojo/on",
+        "dojo/request/xhr",
+        "dojo/domReady!",
+      ], function (dom, on, xhr) {
+        var header = dom.byId("header");
+
+        xhr("https://swapi.dev/api/staships/9/", {
+          handleAs: "json",
+        }).then(
+          function (obj) {
+            // do something with the obj
+            header.innerHTML = obj.name;
+          },
+          function (err) {
+            // Handle the error condition
+            header.innerHTML = "ERR";
+          }
+        );
+      });
     </script>
   </body>
 </html>
