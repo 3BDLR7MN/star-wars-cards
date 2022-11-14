@@ -1,5 +1,7 @@
 # star-wars-cards
 
+# hosted on: swcards.netlify.app
+
 A Dojo based project to create Star Wars info cards.
 
 In this project you're represented with two buttons and some instructoins telling you to press them in order to display a card.
