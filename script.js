@@ -7,6 +7,35 @@ require([
 ], function (dom, on, xhr, dialog) {
   var charbtn = dom.byId("charbtn");
   var planetbtn = dom.byId("planetbtn");
+  var charsData;
+  var planetsData;
+
+  // storing people data locally (notice this only get the first 10 results! check SWAPI)
+  xhr(`https://swapi.dev/api/people/`, {
+    handleAs: "json",
+  }).then(
+    function (obj) {
+      charsData = obj.results;
+      console.log(charsData);
+    },
+    function (err) {
+      // Handle the error condition
+      console.log(err);
+    }
+  );
+
+  // storing planets data locally (notice this only get the first 10 results! check SWAPI)
+  xhr(`https://swapi.dev/api/planets/`, {
+    handleAs: "json",
+  }).then(
+    function (obj) {
+      planetsData = obj;
+    },
+    function (err) {
+      // Handle the error condition
+      console.log(err);
+    }
+  );
 
   // func for when characters buttons is clicked
   on(charbtn, "click", function () {
@@ -43,7 +72,7 @@ require([
       },
       function (err) {
         // Handle the error condition
-        header.innerHTML = "ERR";
+        console.log(err);
       }
     );
   });
@@ -78,7 +107,7 @@ require([
       },
       function (err) {
         // Handle the error condition
-        header.innerHTML = "ERR";
+        console.log(err);
       }
     );
   });
