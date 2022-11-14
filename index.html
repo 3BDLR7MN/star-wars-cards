@@ -20,10 +20,9 @@
 
   <!-- in order for the dijit style to apply you have to link a class to the body -->
   <body class="claro">
-    <h2 id="header">
-      Click this button to get a card of a random Star Wars character
-    </h2>
-    <button id="btn">Click me!</button>
+    <h2>Click one of these buttons to get a Star Wars info card</h2>
+    <button id="charbtn">Characters card</button>
+    <button id="planetbtn">Planets card</button>
 
     <!-- Dojo CDN Script -->
     <!-- https: IMPORTANT -->
@@ -41,10 +40,11 @@
         "dijit/Dialog",
         "dojo/domReady!",
       ], function (dom, on, xhr, dialog) {
-        var btn = dom.byId("btn");
-        var header = dom.byId("header");
+        var charbtn = dom.byId("charbtn");
+        var planetbtn = dom.byId("planetbtn");
 
-        on(btn, "click", function () {
+        // func for when characters buttons is clicked
+        on(charbtn, "click", function () {
           var num;
 
           // this loop is to avoid getting #17 since it's not in the api!
@@ -71,6 +71,41 @@
                             <p>eye color: ${obj.eye_color}</p>
                             <p>birth year: ${obj.birth_year}</p>
                             <p>gender: ${obj.gender}</p>
+                          </div>`,
+              });
+
+              dataDialog.show();
+            },
+            function (err) {
+              // Handle the error condition
+              header.innerHTML = "ERR";
+            }
+          );
+        });
+
+        // func for when planets buttons is clicked
+        on(planetbtn, "click", function () {
+          // no loop is needed here because there was no problem with all api numbers!
+          var num = Math.floor(Math.random() * 60) + 1;
+
+          // this block of code will fetch api data and handle it as a json obj
+          xhr(`https://swapi.dev/api/planets/${num}/`, {
+            handleAs: "json",
+          }).then(
+            function (obj) {
+              // do something with the obj
+              // displaying the json data on a dialog
+              var dataDialog = new dialog({
+                title: `${obj.name} &ensp; #${num}`,
+                style: "width: 200px",
+                content: `<div>
+                            <p>hours per day: ${obj.rotation_period}</p>
+                            <p>days per year: ${obj.orbital_period}</p>
+                            <p>diameter: ${obj.diameter}</p>
+                            <p>climate: ${obj.climate}</p>
+                            <p>terrain: ${obj.terrain}</p>
+                            <p>gravity: ${obj.gravity}</p>
+                            <p>population: ${obj.population}</p>
                           </div>`,
               });
 
