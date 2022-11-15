@@ -1,6 +1,6 @@
 # star-wars-cards
 
-hosted on: swcards.netlify.app
+hosted on: https://swcards.netlify.app/
 
 A Dojo based project to create Star Wars info cards.
 
